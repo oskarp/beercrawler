@@ -57,6 +57,4 @@ public class SystemetApiChangesetComparator {
 
         return eventList;
     }
-
-
 }

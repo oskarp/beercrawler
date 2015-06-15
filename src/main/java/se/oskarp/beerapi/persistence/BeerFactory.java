@@ -1,6 +1,7 @@
 package se.oskarp.beerapi.persistence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -11,12 +12,7 @@ import java.util.ArrayList;
  */
 public class BeerFactory {
 
-    ArrayList<BeerRepository> repos = new ArrayList<BeerRepository>();
-
-    public BeerFactory() {
-
-
-    }
+    private List<BeerRepository> repos = new ArrayList<>();
 
     public BeerRepositoryFS getRepository(String type) {
         switch(type) {
@@ -30,6 +26,4 @@ public class BeerFactory {
          // TODO: This should throw a unsupported repository exception
         return null;
     }
-
-
 }

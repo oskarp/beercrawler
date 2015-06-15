@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -25,47 +26,28 @@ import java.util.Objects;
  *
  */
 public class Beer {
-    String name;
-    String description;
-    String style;
-    int drink_number;
-    double price;
-    String brewery;
-    String country;
-    String origin;
-    double abv;
-    String packaging;
-    String varugrupp;
-    boolean ekologisk;
-    double volym;
-    Date salestart;
-    String supplier;
+    private String name;
+    private String description;
+    private String style;
+    private int drink_number;
+    private double price;
+    private String brewery;
+    private String country;
+    private String origin;
+    private double abv;
+    private String packaging;
+    private String varugrupp;
+    private boolean ekologisk;
+    private double volym;
+    private Date salestart;
+    private String supplier;
 
-    @Override
-    public String toString() {
-        return "Beer{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", style='" + style + '\'' +
-                ", drink_number=" + drink_number +
-                ", price=" + price +
-                ", brewery='" + brewery + '\'' +
-                ", country='" + country + '\'' +
-                ", origin='" + origin + '\'' +
-                ", abv=" + abv +
-                ", packaging='" + packaging + '\'' +
-                ", varugrupp='" + varugrupp + '\'' +
-                ", ekologisk=" + ekologisk +
-                ", volym=" + volym +
-                ", salestart=" + salestart +
-                ", supplier='" + supplier + '\'' +
-                '}';
-    }
+    public Beer() {}
 
-    public Beer() {
-    }
+    public Beer(String name, String description, String style, int drink_number, double price, String brewery,
+                String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk,
+                double volym, Date salestart,String supplier) {
 
-    public Beer(String name, String description, String style, int drink_number, double price, String brewery, String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk, double volym, Date salestart, String supplier) {
         this.name = name;
         this.description = description;
         this.style = style;
@@ -83,49 +65,22 @@ public class Beer {
         this.supplier = supplier;
     }
 
-    /*
-    *   Converts the Beer object to a HashMap
-    *
-    *   @return HashMap<String, Object>
+    /**
+     * Converts the Beer object to a Map
      */
-    public HashMap<String, Object> toMap()  throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public Map<String, Object> toMap()  throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
         Method[] methods = this.getClass().getMethods();
-            HashMap<String, Object> map = new HashMap<String, Object>();
-            for (Method m : methods) {
-                if (m.getName().startsWith("get") && !m.getName().startsWith("getClass")) {
-                    Object value = (Object) m.invoke(this);
-                    map.put(m.getName().substring(3), (Object) value);
-                }
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (Method m : methods) {
+            if (m.getName().startsWith("get") && !m.getName().startsWith("getClass")) {
+                Object value = m.invoke(this);
+                map.put(m.getName().substring(3), value);
             }
-            return map;
-    }
+        }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Beer beer = (Beer) o;
-        return Objects.equals(drink_number, beer.drink_number) &&
-                Objects.equals(price, beer.price) &&
-                Objects.equals(abv, beer.abv) &&
-                Objects.equals(ekologisk, beer.ekologisk) &&
-                Objects.equals(volym, beer.volym) &&
-                Objects.equals(name, beer.name) &&
-                Objects.equals(description, beer.description) &&
-                Objects.equals(style, beer.style) &&
-                Objects.equals(brewery, beer.brewery) &&
-                Objects.equals(country, beer.country) &&
-                Objects.equals(origin, beer.origin) &&
-                Objects.equals(packaging, beer.packaging) &&
-                Objects.equals(varugrupp, beer.varugrupp) &&
-                Objects.equals(salestart, beer.salestart) &&
-                Objects.equals(supplier, beer.supplier);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volym, salestart, supplier);
+        return map;
     }
 
     public String getName() {
@@ -246,5 +201,53 @@ public class Beer {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Beer beer = (Beer) o;
+        return Objects.equals(drink_number, beer.drink_number) &&
+                Objects.equals(price, beer.price) &&
+                Objects.equals(abv, beer.abv) &&
+                Objects.equals(ekologisk, beer.ekologisk) &&
+                Objects.equals(volym, beer.volym) &&
+                Objects.equals(name, beer.name) &&
+                Objects.equals(description, beer.description) &&
+                Objects.equals(style, beer.style) &&
+                Objects.equals(brewery, beer.brewery) &&
+                Objects.equals(country, beer.country) &&
+                Objects.equals(origin, beer.origin) &&
+                Objects.equals(packaging, beer.packaging) &&
+                Objects.equals(varugrupp, beer.varugrupp) &&
+                Objects.equals(salestart, beer.salestart) &&
+                Objects.equals(supplier, beer.supplier);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volym, salestart, supplier);
+    }
+
+    @Override
+    public String toString() {
+        return "Beer{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", style='" + style + '\'' +
+                ", drink_number=" + drink_number +
+                ", price=" + price +
+                ", brewery='" + brewery + '\'' +
+                ", country='" + country + '\'' +
+                ", origin='" + origin + '\'' +
+                ", abv=" + abv +
+                ", packaging='" + packaging + '\'' +
+                ", varugrupp='" + varugrupp + '\'' +
+                ", ekologisk=" + ekologisk +
+                ", volym=" + volym +
+                ", salestart=" + salestart +
+                ", supplier='" + supplier + '\'' +
+                '}';
     }
 }
