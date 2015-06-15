@@ -1,6 +1,5 @@
 package se.oskarp.beerapi.systemet_api;
 
-
 import se.oskarp.beerapi.beer.Beer;
 
 import javax.xml.stream.XMLInputFactory;
@@ -9,30 +8,28 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.List;
 
 /**
- * Created by oskar on 29/05/15.
+ * The purpose of this class is to parse an inputstream containing
+ * XML formatted data from our beloved "Systembolaget" and put
+ * beer articles in a list.
  */
 public class SystemetApiClient {
-    private String origin = "http://www.systembolaget.se/api/assortment/products/xml";
-    //private String origin = "/Users/opeadmin/Desktop/xml.xml";
 
-    public ArrayList<Beer> parse() throws XMLStreamException, IOException, ParseException {
+    public List<Beer> parse(InputStream is) throws XMLStreamException, IOException, ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList<Beer> drinkList = new ArrayList<Beer>();
         Beer currentBeer = null;
         String content = null;
         XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
-        InputStream apa = new URL("http://www.systembolaget.se/api/assortment/products/xml").openStream();
-        XMLStreamReader streamReader = xmlFactory.createXMLStreamReader(apa);
-        //XMLStreamReader streamReader = xmlFactory.createXMLStreamReader(new FileInputStream(this.origin));
+        XMLStreamReader streamReader = xmlFactory.createXMLStreamReader(is);
 
         while(streamReader.hasNext()) {
+
             int event = streamReader.next();
 
             switch (event) {
@@ -48,8 +45,7 @@ public class SystemetApiClient {
                     break;
 
                 case XMLStreamConstants.END_ELEMENT:
-                    if(currentBeer != null) {
-
+                    if (currentBeer != null) {
                         switch (streamReader.getLocalName()) {
                             case "Varnummer":
                                 currentBeer.setDrink_number(Integer.parseInt(content));
@@ -102,10 +98,9 @@ public class SystemetApiClient {
                         }
                     }
             }
-
         }
-        return drinkList;
 
+        return drinkList;
     }
 }
 
