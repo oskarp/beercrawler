@@ -35,9 +35,9 @@ public class EventRepositoryFSTest extends TestCase {
         Beer b3 = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "England", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
         Beer b4 = new Beer("Falcon", "Njet", "Lager", 95483, 20, "Falcon", "Sverige", "", 4.8, "flaska", "öl", true, 335, formatter.parse("1999-10-01"), "Spendrups");
 
-        Event e1 = new Event(213124, Event.Action.Update, b1.toMap(), b3.toMap());
-        Event e2 = new Event(14127, Event.Action.Create, new HashMap<String, Object>(), b2.toMap());
-        Event e3 = new Event(95483, Event.Action.Update, b4.toMap(), new HashMap<String, Object>());
+        Event e1 = new Event(213124, Event.Action.Update, b1, b3);
+        Event e2 = new Event(14127, Event.Action.Create, new Beer(), b2);
+        Event e3 = new Event(95483, Event.Action.Update, b4, new Beer());
 
         List<Event> eventList = new ArrayList<>();
         eventList.add(e1);
@@ -59,6 +59,6 @@ public class EventRepositoryFSTest extends TestCase {
         System.out.println(eventList.get(0).toString());
         System.out.println(events.get(0).toString());
 
-        //assertEquals(eventList, events);
+        assertEquals(eventList, events);
     }
 }

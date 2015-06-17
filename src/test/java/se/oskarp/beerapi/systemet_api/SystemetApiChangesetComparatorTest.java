@@ -70,9 +70,9 @@ public class SystemetApiChangesetComparatorTest extends TestCase {
 
         List<Event> eventList = SystemetApiChangesetComparator.generateEvents(l1, l2);
 
-        Event e1 = new Event(213124, Event.Action.Update, b1.toMap(), b3.toMap());
-        Event e2 = new Event(14127, Event.Action.Create, new HashMap<String, Object>(), b2.toMap());
-        Event e3 = new Event(95483, Event.Action.Update, b4.toMap(), new HashMap<String, Object>());
+        Event e1 = new Event(213124, Event.Action.Update, b1, b3);
+        Event e2 = new Event(14127, Event.Action.Create, new Beer(), b2);
+        Event e3 = new Event(95483, Event.Action.Delete, b4, new Beer());
 
         List<Event> matchEventList = new ArrayList<>();
         matchEventList.add(e1);

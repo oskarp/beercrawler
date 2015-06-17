@@ -33,7 +33,7 @@ public class SystemetApiChangesetComparator {
         for(Beer b: addList) {
             for(Beer b2: deleteList) {
                 if(b.getDrink_number() == b2.getDrink_number()) {
-                    Event e = new Event(b.getDrink_number(), Event.Action.Update, b.toMap(), b2.toMap());
+                    Event e = new Event(b.getDrink_number(), Event.Action.Update, b, b2);
                     eventList.add(e);
                     addList.remove(b);
                     deleteList.remove(b2);
@@ -44,14 +44,14 @@ public class SystemetApiChangesetComparator {
         // For new additions to the beer list we generate Event.Action.Create
 
         for(Beer b: addList) {
-            Event e = new Event(b.getDrink_number(), Event.Action.Create, new HashMap<String, Object>() ,b.toMap());
+            Event e = new Event(b.getDrink_number(), Event.Action.Create, new Beer(), b);
             eventList.add(e);
         }
 
         // For deletions from the beer list we generate Event.Action.Delete
 
         for(Beer b: deleteList) {
-            Event e = new Event(b.getDrink_number(), Event.Action.Delete, b.toMap(), new HashMap<String, Object>() );
+            Event e = new Event(b.getDrink_number(), Event.Action.Delete, b, new Beer() );
             eventList.add(e);
         }
 

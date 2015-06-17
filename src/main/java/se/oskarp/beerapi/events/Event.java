@@ -1,5 +1,7 @@
 package se.oskarp.beerapi.events;
 
+import se.oskarp.beerapi.beer.Beer;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,18 +13,20 @@ public class Event {
 
     private int drinkNumber;
     private Action action;
-    private Map<String, Object> before = new HashMap<>();
-    private Map<String, Object> after = new HashMap<>();
+    private Beer before;
+    private Beer after;
 
-    public Event(int drinkNumber, Action action, Map<String, Object> before, Map<String, Object> after) {
+
+    public enum Action {
+        Create, Update, Delete
+    }
+
+
+    public Event(int drinkNumber, Action action, Beer before, Beer after) {
         this.drinkNumber = drinkNumber;
         this.action = action;
         this.before = before;
         this.after = after;
-    }
-
-    public enum Action {
-        Create, Update, Delete
     }
 
     public int getDrinkNumber() {
@@ -33,19 +37,27 @@ public class Event {
         this.drinkNumber = drinkNumber;
     }
 
-    public Map<String, Object> getBefore() {
+    public Action getAction() {
+        return action;
+    }
+
+    public void setAction(Action action) {
+        this.action = action;
+    }
+
+    public Beer getBefore() {
         return before;
     }
 
-    public void setBefore(Map<String, Object> before) {
+    public void setBefore(Beer before) {
         this.before = before;
     }
 
-    public Map<String, Object> getAfter() {
+    public Beer getAfter() {
         return after;
     }
 
-    public void setAfter(Map<String, Object> after) {
+    public void setAfter(Beer after) {
         this.after = after;
     }
 
@@ -54,14 +66,15 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return Objects.equals(drinkNumber, event.drinkNumber) &&
-                Objects.equals(before, event.before) &&
-                Objects.equals(after, event.after);
+        return Objects.equals(getDrinkNumber(), event.getDrinkNumber()) &&
+                Objects.equals(getAction(), event.getAction()) &&
+                Objects.equals(getBefore(), event.getBefore()) &&
+                Objects.equals(getAfter(), event.getAfter());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(drinkNumber, before, after);
+        return Objects.hash(getDrinkNumber(), getAction(), getBefore(), getAfter());
     }
 
     @Override
