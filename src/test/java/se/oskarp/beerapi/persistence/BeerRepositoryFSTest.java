@@ -29,6 +29,6 @@ public class BeerRepositoryFSTest extends TestCase {
         rfs.save(beers);
         List<Beer> newBeers = rfs.fetchAll();
         assertEquals(beers, newBeers);
-        rfs.cleanUp();
+        //rfs.cleanUp();
     }
 }

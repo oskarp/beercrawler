@@ -14,16 +14,10 @@ public class BeerFactory {
 
     private List<BeerRepository> repos = new ArrayList<>();
 
-    public BeerRepositoryFS getRepository(String type) {
-        switch(type) {
-            case "beer":
-                BeerRepositoryFS repo = new BeerRepositoryFS("");
-                repos.add(repo);
-                return repo;
-            case "event":
-                break;
-        }
-         // TODO: This should throw a unsupported repository exception
-        return null;
+    public BeerRepository getRepository() {
+        BeerRepositoryFS repo = new BeerRepositoryFS("");
+        repos.add(repo);
+        return repo;
+
     }
 }

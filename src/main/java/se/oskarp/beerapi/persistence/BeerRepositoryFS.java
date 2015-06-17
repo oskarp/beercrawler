@@ -33,7 +33,7 @@ public class BeerRepositoryFS implements BeerRepository {
     public void save(List<Beer> beers) {
         try {
             FileOutputStream fos = new FileOutputStream(this.path);
-            puts(mapper.writeValueAsString(beers));
+            //puts(mapper.writeValueAsString(beers));
             mapper.writeValue(fos, beers);
         } catch (IOException e) {
             e.printStackTrace();
