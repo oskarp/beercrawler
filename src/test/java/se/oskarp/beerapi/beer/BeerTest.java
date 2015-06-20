@@ -30,7 +30,7 @@ public class BeerTest extends TestCase {
         secondMap.put("Packaging", "flaska");
         secondMap.put("Varugrupp", "öl");
         secondMap.put("Ekologisk", true);
-        secondMap.put("Volym", 50.0);
+        secondMap.put("Volume", 50.0);
         secondMap.put("Salestart", formatter.parse("2005-10-01"));
         secondMap.put("Supplier", "Åbro");
 

@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * Event represents a change to the state of one of the Beers in the API we track.
+ * The event object is simply put a identifier (drinkNumber), what happened (action),
+ * how it looked before and how it looked after.
+ *
  * Created by oskar on 09/06/15.
  */
 public class Event {
@@ -21,6 +25,13 @@ public class Event {
         Create, Update, Delete
     }
 
+    /**
+     *
+     * @param drinkNumber Unique number from the Beer object tracked.
+     * @param action Enum of what type of change it was.
+     * @param before State of the beer before the change. In case of create, send in empty Beer object.
+     * @param after State of the beer after the change. In case of delete, send in empty Beer object.
+     */
 
     public Event(int drinkNumber, Action action, Beer before, Beer after) {
         this.drinkNumber = drinkNumber;
@@ -33,6 +44,10 @@ public class Event {
         return drinkNumber;
     }
 
+    /**
+     * DrinkNumber is the atomic identifier of a unique drink. This is a number created by Systembolaget.
+     * @param drinkNumber
+     */
     public void setDrinkNumber(int drinkNumber) {
         this.drinkNumber = drinkNumber;
     }

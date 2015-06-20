@@ -5,15 +5,21 @@ import java.util.List;
 
 /**
  *
- * This class simply rotates four repositories (in reality four json files).
+ * The BeerFactory is a structured way to initialize our BeerRepository.
  *
  *
  * Created by oskar on 12/06/15.
  */
 public class BeerFactory {
 
-    private List<BeerRepository> repos = new ArrayList<>();
+    private final List<BeerRepository> repos = new ArrayList<>();
 
+    /**
+     * For now we only offer FileSystem storage of the beer objects. We should keep a backlog of Beer serializations however
+     * in case of something breaking. The extent of this backlog is to be discussed.
+     *
+     * @return BeerRepository Returns a repository to store the Beer objects.
+     */
     public BeerRepository getRepository() {
         BeerRepositoryFS repo = new BeerRepositoryFS("");
         repos.add(repo);

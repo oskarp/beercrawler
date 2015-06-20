@@ -22,6 +22,15 @@ public class SystemetApiClient {
 
     private static String DATE_FORMAT = "yyyy-MM-dd";
 
+    /**
+     *
+     * @param is InputStream of a Systembolaget XML file to be parsed.
+     * @return A list of Beer objects
+     * @throws XMLStreamException
+     * @throws IOException
+     * @throws ParseException
+     */
+
     public List<Beer> parse(InputStream is) throws XMLStreamException, IOException, ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
@@ -63,7 +72,7 @@ public class SystemetApiClient {
                             currentBeer.setPrice(Double.parseDouble(content));
                             break;
                         case "Volymiml":
-                            currentBeer.setVolym(Double.parseDouble(content));
+                            currentBeer.setVolume(Double.parseDouble(content));
                             break;
                         case "Saljstart":
                             currentBeer.setSalestart(formatter.parse(content));

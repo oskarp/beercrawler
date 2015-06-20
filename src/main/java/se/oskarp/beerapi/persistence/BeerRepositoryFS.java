@@ -13,12 +13,20 @@ import static org.boon.Boon.puts;
 
 
 /**
+ * BeerRepositoryFS persists Beers to the File System.
+ *
  * Created by oskar on 12/06/15.
  */
 public class BeerRepositoryFS implements BeerRepository {
 
     private String path;
     private ObjectMapper mapper = JsonFactory.create();
+
+    /**
+     * Constructor that allows for setting the path where the repo is persisted.
+     *
+     * @param path If path is specified, it saves the file to there. Leave empty or "" if no preference.
+     */
 
     public BeerRepositoryFS(String path) {
         if (path.equals("") || path.isEmpty()) {
@@ -30,21 +38,25 @@ public class BeerRepositoryFS implements BeerRepository {
         }
     }
 
+    /**
+     * Saves the list of Beers to disk using Boons .
+     * @param beers The list of Beers to be persisted.
+     */
     public void save(List<Beer> beers) {
         try {
             FileOutputStream fos = new FileOutputStream(this.path);
-            //puts(mapper.writeValueAsString(beers));
             mapper.writeValue(fos, beers);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-     // TODO: This shouldn't instantiate an empty arraylist and then discarding it. For now the option is to return null, which no.. just no.
+    /**
+     * fetchAll uses Boon
+     * @return
+     */
     public List<Beer> fetchAll() {
-        ObjectMapper mapper =  JsonFactory.create();
         List<Beer> beers = new ArrayList<>();
-
         try {
             beers = mapper.readValue(new FileInputStream(this.path), List.class, Beer.class);
         } catch (FileNotFoundException e) {

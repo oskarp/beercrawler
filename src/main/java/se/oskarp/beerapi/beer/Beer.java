@@ -8,22 +8,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * The beer object is the representation of a Artikel from Systembolagets API of artikeltyp Öl.
+ * Variable names have been liberally mapped from their Swedish equivalent.
+ *
  * Created by oskar on 29/05/15.
- *
- *
- * TODO: Map this to what the PHP service expects
- *  $table->increments('id');
-    $table->string('name');
-    $table->string('description');
-    $table->integer('style_id');
-    $table->integer('drink_number')->uniqe();
-    $table->integer('price');
-    $table->integer('brewery_id');
-    $table->integer('country_id');
-    $table->integer('abv');
- *
- *
- *
  */
 public class Beer {
     private String name;
@@ -38,15 +26,18 @@ public class Beer {
     private String packaging;
     private String varugrupp;
     private boolean ekologisk;
-    private double volym;
+    private double volume;
     private Date salestart;
     private String supplier;
 
+    /**
+     * Events sometimes requires empty Beer objects to represent states of Create or Delete.
+     */
     public Beer() {}
 
     public Beer(String name, String description, String style, int drink_number, double price, String brewery,
                 String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk,
-                double volym, Date salestart,String supplier) {
+                double volume, Date salestart,String supplier) {
 
         this.name = name;
         this.description = description;
@@ -60,7 +51,7 @@ public class Beer {
         this.packaging = packaging;
         this.varugrupp = varugrupp;
         this.ekologisk = ekologisk;
-        this.volym = volym;
+        this.volume = volume;
         this.salestart = salestart;
         this.supplier = supplier;
     }
@@ -179,12 +170,12 @@ public class Beer {
         this.ekologisk = ekologisk;
     }
 
-    public double getVolym() {
-        return volym;
+    public double getVolume() {
+        return volume;
     }
 
-    public void setVolym(double volym) {
-        this.volym = volym;
+    public void setVolume(double volume) {
+        this.volume = volume;
     }
 
     public Date getSalestart() {
@@ -212,7 +203,7 @@ public class Beer {
                 Objects.equals(price, beer.price) &&
                 Objects.equals(abv, beer.abv) &&
                 Objects.equals(ekologisk, beer.ekologisk) &&
-                Objects.equals(volym, beer.volym) &&
+                Objects.equals(volume, beer.volume) &&
                 Objects.equals(name, beer.name) &&
                 Objects.equals(description, beer.description) &&
                 Objects.equals(style, beer.style) &&
@@ -227,7 +218,7 @@ public class Beer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volym, salestart, supplier);
+        return Objects.hash(name, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volume, salestart, supplier);
     }
 
     @Override
@@ -245,9 +236,23 @@ public class Beer {
                 ", packaging='" + packaging + '\'' +
                 ", varugrupp='" + varugrupp + '\'' +
                 ", ekologisk=" + ekologisk +
-                ", volym=" + volym +
+                ", volume=" + volume +
                 ", salestart=" + salestart +
                 ", supplier='" + supplier + '\'' +
                 '}';
     }
 }
+
+/**
+ * TODO: Map this to what the PHP service expects
+ *  $table->increments('id');
+ $table->string('name');
+ $table->string('description');
+ $table->integer('style_id');
+ $table->integer('drink_number')->uniqe();
+ $table->integer('price');
+ $table->integer('brewery_id');
+ $table->integer('country_id');
+ $table->integer('abv');
+ *
+ */

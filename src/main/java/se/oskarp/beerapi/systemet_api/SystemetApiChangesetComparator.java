@@ -9,10 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ *
+ *
  * Created by oskar on 09/06/15.
  */
 public class SystemetApiChangesetComparator {
 
+    /**
+     * Compares two lists of Beer and finds Beers that differ between the two lists.
+     * @param newList The original list
+     * @param oldList The list that is to be compared against.
+     * @return List of Beer that has changed.
+     */
     public static List<Beer> compare(List<Beer> newList, List<Beer> oldList) {
         List<Beer> changeList = new ArrayList<>();
         for(Beer b: newList) {
@@ -23,6 +31,15 @@ public class SystemetApiChangesetComparator {
         }
         return changeList;
     }
+
+    /**
+     *
+     * @param addList The "new" list of beers i.e. the one that just came from the API.
+     * @param deleteList The "old" list of beers. USually the one fetched from the local FS.
+     * @return List of Events that differs between the two sets of Beers
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
 
     public static List<Event> generateEvents(List<Beer> addList, List<Beer> deleteList) throws InvocationTargetException, IllegalAccessException {
 
