@@ -1,0 +1,6 @@
+# A template file for application properties. To use this file
+# as a template, copy it to where beercrawler.jar resides, remove
+# the sample suffix from the file name and edit the properties
+# within the file as appropriate.
+
+beercrawler.bolaget.api.url=someurl
