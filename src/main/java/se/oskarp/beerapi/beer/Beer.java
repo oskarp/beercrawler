@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * The beer object is the representation of a Artikel from Systembolagets API of artikeltyp Öl.
- * Variable names have been liberally mapped from their Swedish equivalent.
+ *  Variable names have been liberally mapped from their Swedish equivalent.
  *
  * Created by oskar on 29/05/15.
  */
