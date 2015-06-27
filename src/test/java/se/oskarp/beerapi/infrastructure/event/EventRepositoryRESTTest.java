@@ -1,9 +1,9 @@
 package se.oskarp.beerapi.infrastructure.event;
 
-import junit.framework.TestCase;
+import org.junit.Ignore;
+import org.junit.Test;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.event.Event;
-import se.oskarp.beerapi.infrastructure.event.EventRepositoryREST;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,9 +12,12 @@ import java.util.List;
 /**
  * Created by oskar on 22/06/15.
  */
-public class EventRepositoryRESTTest extends TestCase {
 
-    public void testSave() throws Exception {
+public class EventRepositoryRESTTest {
+
+    @Test
+    @Ignore
+    public void save() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         EventRepositoryREST repo = new EventRepositoryREST();

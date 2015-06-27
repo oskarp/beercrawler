@@ -1,19 +1,21 @@
 package se.oskarp.beerapi.infrastructure.beer;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import se.oskarp.beerapi.domain.beer.Beer;
-import se.oskarp.beerapi.infrastructure.beer.BeerRepositoryFS;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by oskar on 12/06/15.
  */
-public class BeerRepositoryFSTest extends TestCase {
+public class BeerRepositoryFSTest {
 
-    public void testSaveAndRetrieve() throws Exception {
+    @Test
+    public void saveAndRetrieve() throws Exception {
         BeerRepositoryFS rfs = new BeerRepositoryFS("");
         List<Beer> beers = new ArrayList<>();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

@@ -1,17 +1,20 @@
 package se.oskarp.beerapi.domain.beer;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by oskar on 11/06/15.
  */
-public class BeerTest extends TestCase {
+public class BeerTest {
 
-    public void testToMap() throws Exception {
+    @Test
+    public void toMap() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Beer beer = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
@@ -35,7 +38,6 @@ public class BeerTest extends TestCase {
         secondMap.put("Supplier", "Åbro");
 
         assertEquals(firstMap, secondMap);
-
     }
 
 }

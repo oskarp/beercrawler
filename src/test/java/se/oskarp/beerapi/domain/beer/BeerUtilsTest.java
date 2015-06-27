@@ -1,18 +1,21 @@
 package se.oskarp.beerapi.domain.beer;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 import se.oskarp.beerapi.domain.event.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Created by oskar on 11/06/15.
  */
-public class BeerUtilsTest extends TestCase {
+public class BeerUtilsTest {
 
-    public void testCompare() throws Exception {
+    @Test
+    public void compare() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Beer b1 = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
@@ -49,7 +52,9 @@ public class BeerUtilsTest extends TestCase {
     /*
      This test should result in the following event being generated. Norrlands guld being added, Åbro changed and Falcon deleted
      */
-    public void testGenerateEvents() throws Exception {
+
+    @Test
+    public void generateEvents() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Beer b1 = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");

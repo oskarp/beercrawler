@@ -1,17 +1,18 @@
 package se.oskarp.beerapi.infrastructure.event;
 
-import junit.framework.TestCase;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
+import org.junit.Test;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.event.Event;
-import se.oskarp.beerapi.infrastructure.event.EventRepositoryFS;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -20,9 +21,10 @@ import java.util.List;
  *
  * Created by oskar on 17/06/15.
  */
-public class EventRepositoryFSTest extends TestCase {
+public class EventRepositoryFSTest {
 
-    public void testSave() throws Exception {
+    @Test
+    public void save() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 
