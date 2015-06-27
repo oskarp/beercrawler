@@ -1,6 +1,6 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.beer;
 
-import se.oskarp.beerapi.beer.BeerRepository;
+import se.oskarp.beerapi.domain.beer.BeerRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.beer;
 
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
-import se.oskarp.beerapi.beer.Beer;
-import se.oskarp.beerapi.beer.BeerRepository;
+import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.beer.BeerRepository;
 
 import java.io.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.event;
 
-import se.oskarp.beerapi.event.EventRepository;
+import se.oskarp.beerapi.domain.event.EventRepository;
 
 /**
  * The EventFactory is a structured way to initialize our EventRepository.

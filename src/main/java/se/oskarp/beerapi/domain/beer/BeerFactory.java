@@ -1,6 +1,4 @@
-package se.oskarp.beerapi.beer;
-
-import se.oskarp.beerapi.beer.Beer;
+package se.oskarp.beerapi.domain.beer;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;

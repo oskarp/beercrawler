@@ -1,6 +1,6 @@
-package se.oskarp.beerapi.beer;
+package se.oskarp.beerapi.domain.beer;
 
-import se.oskarp.beerapi.event.Event;
+import se.oskarp.beerapi.domain.event.Event;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;

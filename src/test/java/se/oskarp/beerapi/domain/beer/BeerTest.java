@@ -1,4 +1,4 @@
-package se.oskarp.beerapi.beer;
+package se.oskarp.beerapi.domain.beer;
 
 import junit.framework.TestCase;
 

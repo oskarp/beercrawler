@@ -1,8 +1,9 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.event;
 
 import junit.framework.TestCase;
-import se.oskarp.beerapi.beer.Beer;
-import se.oskarp.beerapi.event.Event;
+import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.event.Event;
+import se.oskarp.beerapi.infrastructure.event.EventRepositoryREST;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

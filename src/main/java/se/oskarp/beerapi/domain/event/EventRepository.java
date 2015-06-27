@@ -1,4 +1,4 @@
-package se.oskarp.beerapi.event;
+package se.oskarp.beerapi.domain.event;
 
 import java.util.List;
 

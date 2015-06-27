@@ -1,7 +1,8 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.beer;
 
 import junit.framework.TestCase;
-import se.oskarp.beerapi.beer.Beer;
+import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.infrastructure.beer.BeerRepositoryFS;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

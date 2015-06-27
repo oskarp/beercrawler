@@ -1,10 +1,11 @@
-package se.oskarp.beerapi.persistence;
+package se.oskarp.beerapi.infrastructure.event;
 
 import junit.framework.TestCase;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
-import se.oskarp.beerapi.beer.Beer;
-import se.oskarp.beerapi.event.Event;
+import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.event.Event;
+import se.oskarp.beerapi.infrastructure.event.EventRepositoryFS;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package se.oskarp.beerapi.beer;
+package se.oskarp.beerapi.domain.beer;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

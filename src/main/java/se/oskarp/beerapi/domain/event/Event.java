@@ -1,6 +1,6 @@
-package se.oskarp.beerapi.event;
+package se.oskarp.beerapi.domain.event;
 
-import se.oskarp.beerapi.beer.Beer;
+import se.oskarp.beerapi.domain.beer.Beer;
 
 import java.util.Objects;
 
