@@ -1,5 +1,7 @@
 package se.oskarp.beerapi.persistence;
 
+import se.oskarp.beerapi.beer.BeerRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 

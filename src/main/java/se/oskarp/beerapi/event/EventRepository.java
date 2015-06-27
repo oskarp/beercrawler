@@ -1,6 +1,4 @@
-package se.oskarp.beerapi.persistence;
-
-import se.oskarp.beerapi.event.Event;
+package se.oskarp.beerapi.event;
 
 import java.util.List;
 

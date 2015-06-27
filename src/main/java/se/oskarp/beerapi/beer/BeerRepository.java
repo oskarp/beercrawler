@@ -1,6 +1,4 @@
-package se.oskarp.beerapi.persistence;
-
-import se.oskarp.beerapi.beer.Beer;
+package se.oskarp.beerapi.beer;
 
 import java.util.List;
 

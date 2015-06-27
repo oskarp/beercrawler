@@ -4,6 +4,7 @@ import org.boon.HTTP;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.event.Event;
+import se.oskarp.beerapi.event.EventRepository;
 
 import java.util.List;
 

@@ -3,6 +3,7 @@ package se.oskarp.beerapi.persistence;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.event.Event;
+import se.oskarp.beerapi.event.EventRepository;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
