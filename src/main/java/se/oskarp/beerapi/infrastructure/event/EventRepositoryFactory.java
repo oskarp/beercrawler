@@ -11,7 +11,7 @@ import se.oskarp.beerapi.domain.event.EventRepository;
  *
  * Created by oskar on 16/06/15.
  */
-public class EventFactory {
+public class EventRepositoryFactory {
     private EventRepository repo;
 
     /**
