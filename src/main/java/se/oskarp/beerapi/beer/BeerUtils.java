@@ -1,11 +1,9 @@
-package se.oskarp.beerapi.systemet_api;
+package se.oskarp.beerapi.beer;
 
-import se.oskarp.beerapi.beer.Beer;
-import se.oskarp.beerapi.events.Event;
+import se.oskarp.beerapi.event.Event;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,7 +11,7 @@ import java.util.List;
  *
  * Created by oskar on 09/06/15.
  */
-public class SystemetApiChangesetComparator {
+public class BeerUtils {
 
     /**
      * Compares two lists of Beer and finds Beers that differ between the two lists.

@@ -1,18 +1,16 @@
-package se.oskarp.beerapi.systemet_api;
+package se.oskarp.beerapi.beer;
 
 import junit.framework.TestCase;
-import se.oskarp.beerapi.events.Event;
-import se.oskarp.beerapi.beer.Beer;
+import se.oskarp.beerapi.event.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by oskar on 11/06/15.
  */
-public class SystemetApiChangesetComparatorTest extends TestCase {
+public class BeerUtilsTest extends TestCase {
 
     public void testCompare() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -30,8 +28,8 @@ public class SystemetApiChangesetComparatorTest extends TestCase {
         l2.add(b2);
         l2.add(b3);
 
-        final List<Beer> list1 = SystemetApiChangesetComparator.compare(l1, l2);
-        final List<Beer> list2 = SystemetApiChangesetComparator.compare(l2, l1);
+        final List<Beer> list1 = BeerUtils.compare(l1, l2);
+        final List<Beer> list2 = BeerUtils.compare(l2, l1);
 
         List<Beer> compareList1 = new ArrayList<Beer>();
         compareList1.add(b1);
@@ -49,7 +47,7 @@ public class SystemetApiChangesetComparatorTest extends TestCase {
     }
 
     /*
-     This test should result in the following events being generated. Norrlands guld being added, Åbro changed and Falcon deleted
+     This test should result in the following event being generated. Norrlands guld being added, Åbro changed and Falcon deleted
      */
     public void testGenerateEvents() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -68,7 +66,7 @@ public class SystemetApiChangesetComparatorTest extends TestCase {
         l2.add(b3);
         l2.add(b4);
 
-        List<Event> eventList = SystemetApiChangesetComparator.generateEvents(l1, l2);
+        List<Event> eventList = BeerUtils.generateEvents(l1, l2);
 
         Event e1 = new Event(213124, Event.Action.Update, b1, b3);
         Event e2 = new Event(14127, Event.Action.Create, new Beer(), b2);

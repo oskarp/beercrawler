@@ -1,9 +1,7 @@
-package se.oskarp.beerapi.events;
+package se.oskarp.beerapi.event;
 
 import se.oskarp.beerapi.beer.Beer;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**

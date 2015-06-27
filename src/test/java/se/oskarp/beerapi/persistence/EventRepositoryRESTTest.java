@@ -1,13 +1,9 @@
 package se.oskarp.beerapi.persistence;
 
 import junit.framework.TestCase;
-import org.boon.json.JsonFactory;
-import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.beer.Beer;
-import se.oskarp.beerapi.events.Event;
+import se.oskarp.beerapi.event.Event;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;

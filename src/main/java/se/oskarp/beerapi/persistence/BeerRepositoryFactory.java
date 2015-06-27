@@ -5,12 +5,12 @@ import java.util.List;
 
 /**
  *
- * The BeerFactory is a structured way to initialize our BeerRepository.
+ * The BeerRepositoryFactory is a structured way to initialize our BeerRepository.
  *
  *
  * Created by oskar on 12/06/15.
  */
-public class BeerFactory {
+public class BeerRepositoryFactory {
 
     private final List<BeerRepository> repos = new ArrayList<>();
 

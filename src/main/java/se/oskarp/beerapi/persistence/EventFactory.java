@@ -1,10 +1,5 @@
 package se.oskarp.beerapi.persistence;
 
-import se.oskarp.beerapi.events.Event;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The EventFactory is a structured way to initialize our EventRepository.
  * Events are meant to simply be persisted by being pushed to another service.

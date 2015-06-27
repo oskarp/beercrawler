@@ -1,4 +1,4 @@
-package se.oskarp.beerapi.systemet_api;
+package se.oskarp.beerapi.beer;
 
 import se.oskarp.beerapi.beer.Beer;
 
@@ -14,11 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The purpose of this class is to parse an inputstream containing
- * XML formatted data from our beloved "Systembolaget" and put
- * beer articles in a list.
+ * This class construct {@link Beer} instances through parsing XML formatted
+ * data from our beloved "Systembolaget".
  */
-public class SystemetApiClient {
+public class BeerFactory {
 
     private static String DATE_FORMAT = "yyyy-MM-dd";
 
@@ -31,7 +30,7 @@ public class SystemetApiClient {
      * @throws ParseException
      */
 
-    public List<Beer> parse(InputStream is) throws XMLStreamException, IOException, ParseException {
+    public List<Beer> create(InputStream is) throws XMLStreamException, IOException, ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
         XMLStreamReader streamReader = xmlFactory.createXMLStreamReader(is);

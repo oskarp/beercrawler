@@ -2,14 +2,11 @@ package se.oskarp.beerapi.persistence;
 
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
-import se.oskarp.beerapi.events.Event;
+import se.oskarp.beerapi.event.Event;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
-
-import static org.boon.Boon.puts;
 
 /**
  * Saves events to file system.
