@@ -37,7 +37,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>se.oskarp.beerapi.Main</mainClass>
+                            <mainClass>se.oskarp.beerapi.application.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

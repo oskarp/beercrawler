@@ -3,4 +3,5 @@
 # the sample suffix from the file name and edit the properties
 # within the file as appropriate.
 
-beercrawler.bolaget.api.url=someurl
+beercrawler.bolaget.api.url=http://www.systembolaget.se/api/assortment/products/xml
+beercrawler.event.repository.url=http://homestead.app/event

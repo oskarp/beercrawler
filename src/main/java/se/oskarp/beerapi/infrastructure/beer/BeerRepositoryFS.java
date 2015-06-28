@@ -1,5 +1,6 @@
 package se.oskarp.beerapi.infrastructure.beer;
 
+import com.google.inject.Inject;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.domain.beer.Beer;
@@ -7,6 +8,7 @@ import se.oskarp.beerapi.domain.beer.BeerRepository;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class BeerRepositoryFS implements BeerRepository {
      * @param path If path is specified, it saves the file to there. Leave empty or "" if no preference.
      */
 
+    @Inject
     public BeerRepositoryFS(String path) {
         if (path.equals("") || path.isEmpty()) {
             Date date = new Date();
@@ -57,6 +60,10 @@ public class BeerRepositoryFS implements BeerRepository {
      * @return
      */
     public List<Beer> fetchAll() {
+        if (!fileExists()) {
+            return Collections.emptyList();
+        }
+
         List<Beer> beers = new ArrayList<>();
         try {
             beers = mapper.readValue(new FileInputStream(this.path), List.class, Beer.class);
@@ -66,6 +73,12 @@ public class BeerRepositoryFS implements BeerRepository {
         puts("beers", beers);
 
         return beers;
+    }
+
+    private boolean fileExists() {
+        File f = new File(path);
+
+        return f.exists();
     }
 
     public void cleanUp() {

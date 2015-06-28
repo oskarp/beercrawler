@@ -2,7 +2,6 @@ package se.oskarp.beerapi.domain.beer;
 
 import se.oskarp.beerapi.domain.event.Event;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,11 +34,9 @@ public class BeerUtils {
      * @param addList The "new" list of beers i.e. the one that just came from the API.
      * @param deleteList The "old" list of beers. USually the one fetched from the local FS.
      * @return List of Events that differs between the two sets of Beers
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
      */
 
-    public static List<Event> generateEvents(List<Beer> addList, List<Beer> deleteList) throws InvocationTargetException, IllegalAccessException {
+    public static List<Event> generateEvents(List<Beer> addList, List<Beer> deleteList) {
 
         List<Event> eventList = new ArrayList<>();
 

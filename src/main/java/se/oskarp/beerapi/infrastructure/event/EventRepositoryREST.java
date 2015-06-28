@@ -1,11 +1,13 @@
 package se.oskarp.beerapi.infrastructure.event;
 
+import com.google.inject.Inject;
 import org.boon.HTTP;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.domain.event.Event;
 import se.oskarp.beerapi.domain.event.EventRepository;
 
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -13,9 +15,13 @@ import java.util.List;
  */
 public class EventRepositoryREST implements EventRepository {
 
-    final String url = "http://homestead.app/event";
+    final String url;
     final private ObjectMapper mapper = JsonFactory.create();
 
+    @Inject
+    public EventRepositoryREST(@Named("beercrawler.event.repository.url") String url) {
+        this.url = url;
+    }
 
     @Override
     public void save(List<Event> events) {

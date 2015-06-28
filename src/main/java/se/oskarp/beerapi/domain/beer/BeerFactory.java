@@ -1,11 +1,12 @@
 package se.oskarp.beerapi.domain.beer;
 
+import com.google.inject.Inject;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,99 +20,118 @@ public class BeerFactory {
 
     private static String DATE_FORMAT = "yyyy-MM-dd";
 
+    private BeerSource source;
+
+    @Inject
+    public BeerFactory(BeerSource source) {
+        this.source = source;
+    }
+
     /**
-     *
-     * @param is InputStream of a Systembolaget XML file to be parsed.
      * @return A list of Beer objects
      * @throws XMLStreamException
      * @throws IOException
      * @throws ParseException
      */
 
-    public List<Beer> create(InputStream is) throws XMLStreamException, IOException, ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
-        XMLStreamReader streamReader = xmlFactory.createXMLStreamReader(is);
-
+    public List<Beer> create() {
         List<Beer> result = new ArrayList<>();
+
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        XMLStreamReader streamReader = newStreamReader();
+
         String content = null;
         Beer currentBeer = null;
 
-        while (streamReader.hasNext()) {
+        try {
+            while (streamReader.hasNext()) {
 
-            int event = streamReader.next();
+                int event = streamReader.next();
 
-            switch (event) {
+                switch (event) {
 
-                case XMLStreamConstants.START_ELEMENT:
-                    if (streamReader.getLocalName().equals("artikel")) {
-                        currentBeer = new Beer();
-                    }
-                    break;
-
-                case XMLStreamConstants.CHARACTERS:
-                    content = streamReader.getText().trim();
-                    break;
-
-                case XMLStreamConstants.END_ELEMENT:
-                    if (currentBeer == null) {
+                    case XMLStreamConstants.START_ELEMENT:
+                        if (streamReader.getLocalName().equals("artikel")) {
+                            currentBeer = new Beer();
+                        }
                         break;
-                    }
 
-                    switch (streamReader.getLocalName()) {
-                        case "Varnummer":
-                            currentBeer.setDrink_number(Integer.parseInt(content));
+                    case XMLStreamConstants.CHARACTERS:
+                        content = streamReader.getText().trim();
+                        break;
+
+                    case XMLStreamConstants.END_ELEMENT:
+                        if (currentBeer == null) {
                             break;
-                        case "Namn":
-                            currentBeer.setName(content);
-                            break;
-                        case "Prisinklmoms":
-                            currentBeer.setPrice(Double.parseDouble(content));
-                            break;
-                        case "Volymiml":
-                            currentBeer.setVolume(Double.parseDouble(content));
-                            break;
-                        case "Saljstart":
-                            currentBeer.setSalestart(formatter.parse(content));
-                            break;
-                        case "Varugrupp":
-                            currentBeer.setVarugrupp(content.toLowerCase());
-                            break;
-                        case "Forpackning":
-                            currentBeer.setPackaging(content);
-                            break;
-                        case "Ursprung":
-                            currentBeer.setOrigin(content);
-                            break;
-                        case "Ursprunglandnamn":
-                            currentBeer.setCountry(content);
-                            break;
-                        case "Producent":
-                            currentBeer.setBrewery(content);
-                            break;
-                        case "Leverantor":
-                            currentBeer.setSupplier(content);
-                            break;
-                        // TODO: Implement this to account for (as in remove) the % sign that the fucktard API sends.
-                        case "Alkoholhalt":
-                            //currentBeer.abv = Double.parseDouble(content);
-                            break;
-                        case "Ekologisk":
-                            currentBeer.setEkologisk(Boolean.parseBoolean(content));
-                            break;
-                        case "RavarorBeskrivning":
-                            currentBeer.setDescription(content);
-                            break;
-                        case "artikel":
-                            if (currentBeer.getVarugrupp().equals("öl")) {
-                                result.add(currentBeer);
-                            }
-                            break;
-                    }
+                        }
+
+                        switch (streamReader.getLocalName()) {
+                            case "Varnummer":
+                                currentBeer.setDrink_number(Integer.parseInt(content));
+                                break;
+                            case "Namn":
+                                currentBeer.setName(content);
+                                break;
+                            case "Prisinklmoms":
+                                currentBeer.setPrice(Double.parseDouble(content));
+                                break;
+                            case "Volymiml":
+                                currentBeer.setVolume(Double.parseDouble(content));
+                                break;
+                            case "Saljstart":
+                                currentBeer.setSalestart(formatter.parse(content));
+                                break;
+                            case "Varugrupp":
+                                currentBeer.setVarugrupp(content.toLowerCase());
+                                break;
+                            case "Forpackning":
+                                currentBeer.setPackaging(content);
+                                break;
+                            case "Ursprung":
+                                currentBeer.setOrigin(content);
+                                break;
+                            case "Ursprunglandnamn":
+                                currentBeer.setCountry(content);
+                                break;
+                            case "Producent":
+                                currentBeer.setBrewery(content);
+                                break;
+                            case "Leverantor":
+                                currentBeer.setSupplier(content);
+                                break;
+                            // TODO: Implement this to account for (as in remove) the % sign that the fucktard API sends.
+                            case "Alkoholhalt":
+                                //currentBeer.abv = Double.parseDouble(content);
+                                break;
+                            case "Ekologisk":
+                                currentBeer.setEkologisk(Boolean.parseBoolean(content));
+                                break;
+                            case "RavarorBeskrivning":
+                                currentBeer.setDescription(content);
+                                break;
+                            case "artikel":
+                                if (currentBeer.getVarugrupp().equals("öl")) {
+                                    result.add(currentBeer);
+                                }
+                                break;
+                        }
+                }
             }
+        } catch (Exception e) {
+            throw new BeerFactoryException(e);
         }
 
         return result;
+    }
+
+    private XMLStreamReader newStreamReader() {
+        XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
+
+        try {
+            return xmlFactory.createXMLStreamReader(source.getInputStream());
+        } catch (XMLStreamException e) {
+            throw new BeerFactoryException(e);
+        }
     }
 }
 
