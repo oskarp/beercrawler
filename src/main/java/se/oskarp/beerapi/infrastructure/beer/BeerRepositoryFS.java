@@ -53,7 +53,7 @@ public class BeerRepositoryFS implements BeerRepository {
     }
 
     /**
-     * fetchAll uses Boon
+     * fetchAll uses Boon to read the beers from disk and make objects of them.
      * @return
      */
     public List<Beer> fetchAll() {
@@ -63,8 +63,6 @@ public class BeerRepositoryFS implements BeerRepository {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        puts("beers", beers);
-
         return beers;
     }
 

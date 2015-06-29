@@ -21,7 +21,7 @@ public class Configuration extends AbstractModule {
         Properties properties = new Properties();
 
         try {
-            properties.load(new FileReader("application.properties"));
+            properties.load(new FileReader("src/main/resources/application.properties"));
         } catch (IOException e) {
             System.out.println(e.getMessage());
             System.exit(0);
