@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.beer.BeerFactory;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
-import se.oskarp.beerapi.domain.beer.BeerUtils;
+import se.oskarp.beerapi.domain.event.EventFactory;
 import se.oskarp.beerapi.domain.event.EventRepository;
 
 import java.util.List;
@@ -34,8 +34,7 @@ public class BeerProxy {
         List<Beer> local = beerRepository.fetchAll();
         System.out.println(String.format("Local cache lookup resulted in %s beers", local.size()));
 
-        eventRepository.save(
-                BeerUtils.generateEvents(remote, local));
+        eventRepository.save(new EventFactory(local).create(remote));
         System.out.println("Events have been saved, hooray!");
     }
 }

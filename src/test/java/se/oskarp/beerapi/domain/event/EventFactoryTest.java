@@ -1,7 +1,7 @@
-package se.oskarp.beerapi.domain.beer;
+package se.oskarp.beerapi.domain.event;
 
 import org.junit.Test;
-import se.oskarp.beerapi.domain.event.Event;
+import se.oskarp.beerapi.domain.beer.Beer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,47 +12,11 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by oskar on 11/06/15.
  */
-public class BeerUtilsTest {
-
-    @Test
-    public void compare() throws Exception {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        Beer b1 = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
-        Beer b2 = new Beer("Norrlands guld", "Hopps", "Lager", 14127, 19.5, "Spendrups", "Sverige", "", 5, "flaska", "öl", true, 330, formatter.parse("2005-10-01"), "Spendrups");
-        Beer b3 = new Beer("Åbro Orginal", "Damm", "Lager", 213124, 23.2, "Åbro", "England", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
-
-        List<Beer> l1 = new ArrayList<Beer>();
-        List<Beer> l2 = new ArrayList<Beer>();
-
-        l1.add(b1);
-        l1.add(b2);
-        
-        l2.add(b2);
-        l2.add(b3);
-
-        final List<Beer> list1 = BeerUtils.compare(l1, l2);
-        final List<Beer> list2 = BeerUtils.compare(l2, l1);
-
-        List<Beer> compareList1 = new ArrayList<Beer>();
-        compareList1.add(b1);
-
-        // list1 should only have b1 in it
-
-        assertEquals(list1, compareList1);
-
-        List<Beer> compareList2 = new ArrayList<Beer>();
-        compareList2.add(b3);
-
-        // list2 should only have b3 in it
-
-        assertEquals(list2, compareList2);
-    }
+public class EventFactoryTest {
 
     /*
      This test should result in the following event being generated. Norrlands guld being added, Åbro changed and Falcon deleted
      */
-
     @Test
     public void generateEvents() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -71,7 +35,7 @@ public class BeerUtilsTest {
         l2.add(b3);
         l2.add(b4);
 
-        List<Event> eventList = BeerUtils.generateEvents(l1, l2);
+        List<Event> eventList = new EventFactory(l2).create(l1);
 
         Event e1 = new Event(213124, Event.Action.Update, b1, b3);
         Event e2 = new Event(14127, Event.Action.Create, new Beer(), b2);
