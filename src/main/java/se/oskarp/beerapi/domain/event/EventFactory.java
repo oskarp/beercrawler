@@ -15,7 +15,7 @@ public class EventFactory {
     /**
      * The local beer cache
      */
-    private List<Beer> localCache;
+    private final List<Beer> localCache;
 
     public EventFactory(List<Beer> localCache) {
         this.localCache = localCache;
@@ -27,7 +27,7 @@ public class EventFactory {
      * @param remote The "new" list of beers i.e. the one that just came from the API.
      * @return List of Events that differs between the two sets of Beers
      */
-    public List<Event> create(List<Beer> remote) {
+    public List<Event> create(final List<Beer> remote) {
 
         List<Event> result = new ArrayList<>();
 

@@ -2,10 +2,10 @@ package se.oskarp.beerapi.application;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import se.oskarp.beerapi.domain.beer.BeerImporter;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
-import se.oskarp.beerapi.domain.beer.BeerSource;
-import se.oskarp.beerapi.domain.beer.BeerUrlSource;
 import se.oskarp.beerapi.domain.event.EventRepository;
+import se.oskarp.beerapi.infrastructure.beer.BeerImporterSystemetApi;
 import se.oskarp.beerapi.infrastructure.beer.BeerRepositoryFS;
 import se.oskarp.beerapi.infrastructure.event.EventRepositoryREST;
 
@@ -22,8 +22,8 @@ public class Configuration extends AbstractModule {
     @Override
     protected void configure() {
         bind(BeerRepository.class).toInstance(new BeerRepositoryFS("local.json"));
-        bind(BeerSource.class).to(BeerUrlSource.class);
         bind(EventRepository.class).to(EventRepositoryREST.class);
+        bind(BeerImporter.class).to(BeerImporterSystemetApi.class);
 
         if (properties != null) {
             Names.bindProperties(binder(), properties);
