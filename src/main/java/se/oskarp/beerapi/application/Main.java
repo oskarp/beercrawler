@@ -14,14 +14,14 @@ public class Main {
     private static String PROPERTIES_FILE_NAME = "application.properties";
 
     public static void main(String[] args) throws ParseException, XMLStreamException, IOException {
-        System.out.println("--- Begin execution          ---");
+        System.out.println("BeerProxy™ execution start");
 
         Injector injector = Guice.createInjector(
                 new Configuration(createProperties()));
 
         injector.getInstance(BeerProxy.class).execute();
 
-        System.out.println("--- End execution            ---");
+        System.out.println("BeerProxy™ execution end");
     }
 
     private static Properties createProperties() {
