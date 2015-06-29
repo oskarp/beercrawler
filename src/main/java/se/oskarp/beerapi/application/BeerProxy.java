@@ -2,10 +2,10 @@ package se.oskarp.beerapi.application;
 
 import com.google.inject.Inject;
 import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.beer.BeerImporter;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
 import se.oskarp.beerapi.domain.event.EventFactory;
 import se.oskarp.beerapi.domain.event.EventRepository;
-import se.oskarp.beerapi.infrastructure.beer.BeerImporterSystemetApi;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
 public class BeerProxy {
 
     private final BeerRepository localCache;
-    private final BeerImporterSystemetApi beerImporter;
+    private final BeerImporter beerImporter;
     private final EventRepository eventRepository;
 
     @Inject
     BeerProxy(BeerRepository localCache,
-              BeerImporterSystemetApi beerImporter,
+              BeerImporter beerImporter,
               EventRepository eventRepository) {
 
         this.localCache = localCache;
