@@ -1,13 +1,18 @@
-package se.oskarp.beerapi.domain.beer;
+package se.oskarp.beerapi.infrastructure.beer;
 
 import com.google.inject.Inject;
+import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.beer.BeerImportException;
+import se.oskarp.beerapi.domain.beer.BeerImporter;
 
+import javax.inject.Named;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
-import java.text.ParseException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,25 +21,27 @@ import java.util.List;
  * This class construct {@link Beer} instances through parsing XML formatted
  * data from our beloved "Systembolaget".
  */
-public class BeerFactory {
+public class BeerImporterSystemetApi implements BeerImporter {
 
     private static String DATE_FORMAT = "yyyy-MM-dd";
 
-    private BeerSource source;
+    private URL url;
 
     @Inject
-    public BeerFactory(BeerSource source) {
-        this.source = source;
+    public BeerImporterSystemetApi(@Named("beercrawler.bolaget.api.url") String url) {
+        try {
+            this.url = new URL(url);
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     /**
-     * @return A list of Beer objects
-     * @throws XMLStreamException
-     * @throws IOException
-     * @throws ParseException
+     * This method performs the actual import
+     * @return The imported beer instances
      */
 
-    public List<Beer> create() {
+    public List<Beer> doImport() {
         List<Beer> result = new ArrayList<>();
 
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
@@ -118,7 +125,7 @@ public class BeerFactory {
                 }
             }
         } catch (Exception e) {
-            throw new BeerFactoryException(e);
+            throw new BeerImportException(e);
         }
 
         return result;
@@ -128,9 +135,9 @@ public class BeerFactory {
         XMLInputFactory xmlFactory = XMLInputFactory.newFactory();
 
         try {
-            return xmlFactory.createXMLStreamReader(source.getInputStream());
-        } catch (XMLStreamException e) {
-            throw new BeerFactoryException(e);
+            return xmlFactory.createXMLStreamReader(url.openStream());
+        } catch (Exception e) {
+            throw new BeerImportException(e);
         }
     }
 }
