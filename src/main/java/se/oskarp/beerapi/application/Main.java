@@ -2,6 +2,8 @@ package se.oskarp.beerapi.application;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.FileReader;
@@ -11,26 +13,28 @@ import java.util.Properties;
 
 public class Main {
 
-    private static String PROPERTIES_FILE_NAME = "application.properties";
+    private static String PROPERTIES_FILE_NAME = "src/main/resources/application.properties";
+
 
     public static void main(String[] args) throws ParseException, XMLStreamException, IOException {
-        System.out.println("BeerProxy™ execution start");
+        Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.Main");
+        logger.info("BeerProxy™ execution start");
 
         Injector injector = Guice.createInjector(
                 new Configuration(createProperties()));
 
         injector.getInstance(BeerProxy.class).execute();
 
-        System.out.println("BeerProxy™ execution end");
+        logger.info("BeerProxy™ execution end");
     }
 
     private static Properties createProperties() {
         Properties result = new Properties();
-
+        Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.Main");
         try {
             result.load(new FileReader(PROPERTIES_FILE_NAME));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             System.exit(0);
         }
 

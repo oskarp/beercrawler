@@ -41,7 +41,6 @@ public class EventRepositoryFS implements EventRepository {
     public void save(List<Event> events) {
         try {
             FileOutputStream fos = new FileOutputStream(this.path);
-            //puts(mapper.writeValueAsString(events));
             mapper.writeValue(fos, events);
         } catch (IOException e) {
             e.printStackTrace();

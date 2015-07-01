@@ -16,11 +16,11 @@ import java.util.List;
 public class EventRepositoryRESTTest {
 
     @Test
-    @Ignore
+    //@Ignore
     public void save() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        EventRepositoryREST repo = new EventRepositoryREST("asdf");
+        EventRepositoryREST repo = new EventRepositoryREST("http://homestead.app/event");
 
         Beer b1 = new Beer("Åbro Orginal", "Damm", "Lager", 1483, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
         Beer b2 = new Beer("Norrlands guld", "Hopps", "Lager", 14127, 19.5, "Spendrups", "Sverige", "", 5, "flaska", "öl", true, 330, formatter.parse("2005-10-01"), "Spendrups");

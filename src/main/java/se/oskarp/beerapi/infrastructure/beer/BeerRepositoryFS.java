@@ -3,6 +3,8 @@ package se.oskarp.beerapi.infrastructure.beer;
 import com.google.inject.Inject;
 import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
 
@@ -21,7 +23,7 @@ import static org.boon.Boon.puts;
  * Created by oskar on 12/06/15.
  */
 public class BeerRepositoryFS implements BeerRepository {
-
+    private final Logger logger = LoggerFactory.getLogger(BeerRepositoryFS.class);
     private String path;
     private ObjectMapper mapper = JsonFactory.create();
 
@@ -51,7 +53,7 @@ public class BeerRepositoryFS implements BeerRepository {
             FileOutputStream fos = new FileOutputStream(this.path);
             mapper.writeValue(fos, beers);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException", e.getStackTrace());
         }
     }
 
@@ -68,7 +70,7 @@ public class BeerRepositoryFS implements BeerRepository {
         try {
             beers = mapper.readValue(new FileInputStream(this.path), List.class, Beer.class);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return beers;
     }

@@ -1,6 +1,8 @@
 package se.oskarp.beerapi.application;
 
 import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.beer.BeerImporter;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
@@ -14,7 +16,7 @@ import java.util.List;
  * proxy functionality.
  */
 public class BeerProxy {
-
+    private final Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.BeerProxy");
     private final BeerRepository localCache;
     private final BeerImporter beerImporter;
     private final EventRepository eventRepository;
@@ -30,15 +32,23 @@ public class BeerProxy {
     }
 
     public void execute() {
-        System.out.println("Remote api call in progress, this might take a while..");
+        logger.info("Remote api call in progress, this might take a while..");
 
         List<Beer> remote = beerImporter.doImport();
-        System.out.println(String.format("Remote api call resulted in %s beers", remote.size()));
+        logger.info(String.format("Remote api call resulted in %s beers", remote.size()));
 
         List<Beer> local = localCache.fetchAll();
-        System.out.println(String.format("Local cache lookup resulted in %s beers", local.size()));
+        logger.info(String.format("Local cache lookup resulted in %s beers", local.size()));
+
+        if(!remote.equals(local)) {
+            localCache.save(remote);
+            logger.info("The fetched list differed from cache, overwriting cache.");
+        } else
+        {
+            logger.info("No changes detected, doing nothing");
+        }
 
         eventRepository.save(new EventFactory(local).create(remote));
-        System.out.println("Events have been saved, hooray!");
+        logger.info("Events have been relayed.");
     }
 }

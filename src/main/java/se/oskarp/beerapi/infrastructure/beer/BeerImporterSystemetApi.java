@@ -1,6 +1,8 @@
 package se.oskarp.beerapi.infrastructure.beer;
 
 import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import se.oskarp.beerapi.domain.beer.Beer;
 import se.oskarp.beerapi.domain.beer.BeerImportException;
 import se.oskarp.beerapi.domain.beer.BeerImporter;
