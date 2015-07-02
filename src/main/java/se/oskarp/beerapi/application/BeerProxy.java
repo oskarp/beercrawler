@@ -16,7 +16,7 @@ import java.util.List;
  * proxy functionality.
  */
 public class BeerProxy {
-    private final Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.BeerProxy");
+    private final Logger logger = LoggerFactory.getLogger(BeerProxy.class);
     private final BeerRepository localCache;
     private final BeerImporter beerImporter;
     private final EventRepository eventRepository;

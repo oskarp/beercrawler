@@ -17,7 +17,7 @@ public class Main {
 
 
     public static void main(String[] args) throws ParseException, XMLStreamException, IOException {
-        Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.Main");
+        Logger logger = LoggerFactory.getLogger(Main.class);
         logger.info("BeerProxy™ execution start");
 
         Injector injector = Guice.createInjector(
@@ -30,7 +30,7 @@ public class Main {
 
     private static Properties createProperties() {
         Properties result = new Properties();
-        Logger logger = LoggerFactory.getLogger("se.oskarp.beerapi.application.Main");
+        Logger logger = LoggerFactory.getLogger(Main.class);
         try {
             result.load(new FileReader(PROPERTIES_FILE_NAME));
         } catch (IOException e) {
