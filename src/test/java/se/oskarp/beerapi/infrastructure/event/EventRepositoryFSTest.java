@@ -37,7 +37,7 @@ public class EventRepositoryFSTest {
 
         Event e1 = new Event(213124, Event.Action.Update, b1, b3);
         Event e2 = new Event(14127, Event.Action.Create, new Beer(), b2);
-        Event e3 = new Event(95483, Event.Action.Update, b4, new Beer());
+        Event e3 = new Event(95483, Event.Action.Delete, b4, new Beer());
 
         List<Event> eventList = new ArrayList<>();
         eventList.add(e1);
