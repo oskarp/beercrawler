@@ -108,9 +108,10 @@ public class BeerImporterSystemetApi implements BeerImporter {
                             case "Leverantor":
                                 currentBeer.setSupplier(content);
                                 break;
-                            // TODO: Implement this to account for (as in remove) the % sign that the fucktard API sends.
+                            // TODO: Implement this to account for (as in remove) the % sign that the systembolaget API sends.
                             case "Alkoholhalt":
-                                //currentBeer.abv = Double.parseDouble(content);
+                                content = content.replace('%', ' ');
+                                currentBeer.setAbv(Double.parseDouble(content));
                                 break;
                             case "Ekologisk":
                                 currentBeer.setEkologisk(Boolean.parseBoolean(content));

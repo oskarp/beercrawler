@@ -9,6 +9,7 @@ import se.oskarp.beerapi.domain.beer.BeerRepository;
 import se.oskarp.beerapi.domain.event.EventFactory;
 import se.oskarp.beerapi.domain.event.EventRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,17 +39,16 @@ public class BeerProxy {
         logger.info(String.format("Remote api call resulted in %s beers", remote.size()));
 
         List<Beer> local = localCache.fetchAll();
-        logger.info(String.format("Local cache lookup resulted in %s beers", local.size()));
+        logger.info(String.format("Local cache lookup has %s beers", local.size()));
 
         if(!remote.equals(local)) {
             localCache.save(remote);
-            logger.info("The fetched list differed from cache, overwriting cache.");
+            logger.info("The fetched list differed from cache, overwriting cache and generating events.");
+            eventRepository.save(new EventFactory(local).create(remote));
         } else
         {
             logger.info("No changes detected, doing nothing");
         }
 
-        eventRepository.save(new EventFactory(local).create(remote));
-        logger.info("Events have been relayed.");
     }
 }

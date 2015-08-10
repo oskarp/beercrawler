@@ -37,7 +37,7 @@ public class Beer {
 
     public Beer(String name, String description, String style, int drink_number, double price, String brewery,
                 String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk,
-                double volume, Date salestart,String supplier) {
+                double volume, Date salestart, String supplier) {
 
         this.name = name;
         this.description = description;

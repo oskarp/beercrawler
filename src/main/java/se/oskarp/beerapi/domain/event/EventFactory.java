@@ -30,35 +30,44 @@ public class EventFactory {
     public List<Event> create(final List<Beer> remote) {
 
         List<Event> result = new ArrayList<>();
-
+        List<Beer> addList = diffBeer(remote, localCache);
+        List<Beer> deleteList = diffBeer(localCache, remote);
         // Find things that simply changed we create Event.Action.Update
-        List<Integer> updated = new ArrayList<>();
-        for (Beer b: remote) {
-            for (Beer b2: localCache) {
-                if (b.getDrink_number() == b2.getDrink_number()) {
-                    updated.add(b.getDrink_number());
-                    result.add(new Event(b.getDrink_number(), Event.Action.Update, b, b2));
+        for(Beer b: addList) {
+            for(Beer b2: deleteList) {
+                if(b.getDrink_number() == b2.getDrink_number()) {
+                    Event e = new Event(b.getDrink_number(), Event.Action.Update, b, b2);
+                    result.add(e);
+                    addList.remove(b);
+                    deleteList.remove(b2);
                 }
             }
         }
 
-        // For new additions to the beer list we create Event.Action.Create
+        // For new additions to the beer list we generate Event.Action.Create
 
-        for (Beer b: remote) {
-            if (!updated.contains(b.getDrink_number())) {
-                result.add(
-                        new Event(b.getDrink_number(), Event.Action.Create, new Beer(), b));
-            }
+        for(Beer b: addList) {
+            Event e = new Event(b.getDrink_number(), Event.Action.Create, new Beer(), b);
+            result.add(e);
         }
 
-        // For deletions from the beer list we create Event.Action.Delete
-        for (Beer b : localCache) {
-            if (!updated.contains(b.getDrink_number())) {
-                result.add(
-                        new Event(b.getDrink_number(), Event.Action.Delete, b, new Beer()));
-            }
+        // For deletions from the beer list we generate Event.Action.Delete
+
+        for(Beer b: deleteList) {
+            Event e = new Event(b.getDrink_number(), Event.Action.Delete, b, new Beer() );
+            result.add(e);
         }
 
         return result;
+    }
+
+    private List<Beer> diffBeer(List<Beer> newList, List<Beer> oldList) {
+        List<Beer> changeList = new ArrayList<>();
+        for(Beer b: newList) {
+            if(!oldList.contains(b)) {
+                changeList.add(b);
+            }
+        }
+        return changeList;
     }
 }
