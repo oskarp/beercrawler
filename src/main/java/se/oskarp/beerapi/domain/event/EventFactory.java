@@ -33,17 +33,24 @@ public class EventFactory {
         List<Beer> addList = diffBeer(remote, localCache);
         List<Beer> deleteList = diffBeer(localCache, remote);
         // Find things that simply changed we create Event.Action.Update
+
+        List<Beer> shouldNotBeAdded = new ArrayList<>();
+        List<Beer> shouldNotBeRemoved = new ArrayList<>();
+
         for(Beer b: addList) {
             for(Beer b2: deleteList) {
                 if(b.getDrink_number() == b2.getDrink_number()) {
                     Event e = new Event(b.getDrink_number(), Event.Action.Update, b, b2);
                     result.add(e);
-                    addList.remove(b);
-                    deleteList.remove(b2);
+                    shouldNotBeAdded.add(b);
+                    shouldNotBeRemoved.add(b2);
                 }
             }
         }
 
+        addList.removeAll(shouldNotBeAdded);
+        deleteList.removeAll(shouldNotBeRemoved);
+ 
         // For new additions to the beer list we generate Event.Action.Create
 
         for(Beer b: addList) {
