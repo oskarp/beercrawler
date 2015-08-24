@@ -22,7 +22,7 @@ public class EventRepositoryRESTTest {
 
         EventRepositoryREST repo = new EventRepositoryREST("http://homestead.app/event");
 
-        Beer b1 = new Beer("Åbro Orginal", "Damm", "Lager", 1483, 23.2, "Åbro", "Sverige", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
+        Beer b1 = new Beer("Åbro orginal", "Smakar lite som en säl luktar.", "Lager", 1483, 22.3, "Åbro", "Sverige", "", 6, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
         Beer b2 = new Beer("Norrlands guld", "Hopps", "Lager", 14127, 19.5, "Spendrups", "Sverige", "", 5, "flaska", "öl", true, 330, formatter.parse("2005-10-01"), "Spendrups");
         Beer b3 = new Beer("Åbro Orginal", "Damm", "Lager", 1483, 23.2, "Åbro", "England", "", 5.2, "flaska", "öl", true, 50, formatter.parse("2005-10-01"), "Åbro");
         Beer b4 = new Beer("Falcon", "Njet", "Lager", 95483, 20, "Falcon", "Sverige", "", 4.8, "flaska", "öl", true, 335, formatter.parse("1999-10-01"), "Spendrups");

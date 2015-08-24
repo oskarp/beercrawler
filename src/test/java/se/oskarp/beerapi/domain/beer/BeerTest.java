@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class BeerTest {
 
+    @Deprecated
     @Test
     public void toMap() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");

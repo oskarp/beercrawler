@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.oskarp.beerapi.domain.beer.Beer;
+import se.oskarp.beerapi.domain.beer.BeerImportException;
 import se.oskarp.beerapi.domain.beer.BeerImporter;
 import se.oskarp.beerapi.domain.beer.BeerRepository;
 import se.oskarp.beerapi.domain.event.EventFactory;
@@ -35,19 +36,22 @@ public class BeerProxy {
     public void execute() {
         logger.info("Remote api call in progress, this might take a while..");
 
-        List<Beer> remote = beerImporter.doImport();
-        logger.info(String.format("Remote api call resulted in %s beers", remote.size()));
+        try {
+            List<Beer> remote = beerImporter.doImport();
+            logger.info(String.format("Remote api call resulted in %s beers", remote.size()));
 
-        List<Beer> local = localCache.fetchAll();
-        logger.info(String.format("Local cache lookup has %s beers", local.size()));
+            List<Beer> local = localCache.fetchAll();
+            logger.info(String.format("Local cache lookup has %s beers", local.size()));
 
-        if(!remote.equals(local)) {
-            localCache.save(remote);
-            logger.info("The fetched list differed from cache, overwriting cache and generating events.");
-            eventRepository.save(new EventFactory(local).create(remote));
-        } else
-        {
-            logger.info("No changes detected, doing nothing");
+            if (!remote.equals(local)) {
+                localCache.save(remote);
+                logger.info("The fetched list differed from cache, overwriting cache and generating events.");
+                eventRepository.save(new EventFactory(local).create(remote));
+            } else {
+                logger.info("No changes detected, doing nothing");
+            }
+        } catch(BeerImportException bie) {
+            logger.error(bie.getMessage());
         }
 
     }
