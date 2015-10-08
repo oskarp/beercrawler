@@ -15,6 +15,7 @@ import java.util.Objects;
  */
 public class Beer {
     private String name;
+    private String name2;
     private String description;
     private String style;
     private int drink_number;
@@ -37,9 +38,10 @@ public class Beer {
 
     public Beer(String name, String description, String style, int drink_number, double price, String brewery,
                 String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk,
-                double volume, Date salestart, String supplier) {
+                double volume, Date salestart, String supplier, String name2) {
 
         this.name = name;
+        this.name2 = name2;
         this.description = description;
         this.style = style;
         this.drink_number = drink_number;
@@ -194,6 +196,14 @@ public class Beer {
         this.supplier = supplier;
     }
 
+    public String getName2() {
+        return name2;
+    }
+
+    public void setName2(String name2) {
+        this.name2 = name2;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -205,6 +215,7 @@ public class Beer {
                 Objects.equals(ekologisk, beer.ekologisk) &&
                 Objects.equals(volume, beer.volume) &&
                 Objects.equals(name, beer.name) &&
+                Objects.equals(name2, beer.name2) &&
                 Objects.equals(description, beer.description) &&
                 Objects.equals(style, beer.style) &&
                 Objects.equals(brewery, beer.brewery) &&
@@ -218,13 +229,14 @@ public class Beer {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volume, salestart, supplier);
+        return Objects.hash(name, name2, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volume, salestart, supplier);
     }
 
     @Override
     public String toString() {
         return "Beer{" +
                 "name='" + name + '\'' +
+                ", name2='" + name2 + '\'' +
                 ", description='" + description + '\'' +
                 ", style='" + style + '\'' +
                 ", drink_number=" + drink_number +

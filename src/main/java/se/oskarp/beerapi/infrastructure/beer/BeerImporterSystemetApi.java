@@ -81,6 +81,9 @@ public class BeerImporterSystemetApi implements BeerImporter {
                             case "Namn":
                                 currentBeer.setName(content);
                                 break;
+                            case "Namn2":
+                                currentBeer.setName2(content);
+                                break;
                             case "Prisinklmoms":
                                 currentBeer.setPrice(Double.parseDouble(content));
                                 break;
@@ -120,7 +123,7 @@ public class BeerImporterSystemetApi implements BeerImporter {
                                 currentBeer.setDescription(content);
                                 break;
                             case "artikel":
-                                if (currentBeer.getVarugrupp().equals("öl")) {
+                                if (currentBeer.getVarugrupp().startsWith("öl")) {
                                     result.add(currentBeer);
                                 }
                                 break;
