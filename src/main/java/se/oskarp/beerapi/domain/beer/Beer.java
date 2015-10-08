@@ -18,6 +18,7 @@ public class Beer {
     private String name2;
     private String description;
     private String style;
+    private int nr;
     private int drink_number;
     private double price;
     private String brewery;
@@ -38,13 +39,14 @@ public class Beer {
 
     public Beer(String name, String description, String style, int drink_number, double price, String brewery,
                 String country, String origin, double abv, String packaging, String varugrupp, boolean ekologisk,
-                double volume, Date salestart, String supplier, String name2) {
+                double volume, Date salestart, String supplier, String name2, int nr) {
 
         this.name = name;
         this.name2 = name2;
         this.description = description;
         this.style = style;
         this.drink_number = drink_number;
+        this.nr = nr;
         this.price = price;
         this.brewery = brewery;
         this.country = country;
@@ -83,7 +85,17 @@ public class Beer {
     public void setName(String name) {
         this.name = name;
     }
+    public int getNr() {
+        return nr;
+    }
 
+    public void setNr(int nr) {
+        this.nr = nr;
+    }
+
+    public boolean isEkologisk() {
+        return ekologisk;
+    }
     public String getDescription() {
         return description;
     }
@@ -224,12 +236,13 @@ public class Beer {
                 Objects.equals(packaging, beer.packaging) &&
                 Objects.equals(varugrupp, beer.varugrupp) &&
                 Objects.equals(salestart, beer.salestart) &&
+                Objects.equals(nr, beer.nr) &&
                 Objects.equals(supplier, beer.supplier);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, name2, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volume, salestart, supplier);
+        return Objects.hash(name, name2, description, style, drink_number, price, brewery, country, origin, abv, packaging, varugrupp, ekologisk, volume, salestart, supplier, nr);
     }
 
     @Override
@@ -242,6 +255,7 @@ public class Beer {
                 ", drink_number=" + drink_number +
                 ", price=" + price +
                 ", brewery='" + brewery + '\'' +
+                ", nr='" + nr + '\'' +
                 ", country='" + country + '\'' +
                 ", origin='" + origin + '\'' +
                 ", abv=" + abv +

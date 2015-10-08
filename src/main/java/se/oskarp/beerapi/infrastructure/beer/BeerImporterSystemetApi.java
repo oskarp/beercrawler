@@ -108,6 +108,9 @@ public class BeerImporterSystemetApi implements BeerImporter {
                             case "Producent":
                                 currentBeer.setBrewery(content);
                                 break;
+                            case "nr":
+                                currentBeer.setNr(Integer.parseInt(content));
+                                break;
                             case "Leverantor":
                                 currentBeer.setSupplier(content);
                                 break;
@@ -124,6 +127,7 @@ public class BeerImporterSystemetApi implements BeerImporter {
                                 break;
                             case "artikel":
                                 if (currentBeer.getVarugrupp().startsWith("öl")) {
+                                    currentBeer.setStyle(currentBeer.getVarugrupp().substring(4));
                                     result.add(currentBeer);
                                 }
                                 break;
