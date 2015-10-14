@@ -35,7 +35,6 @@ public class EventRepositoryRESTTest {
         eventList.add(e1);
         eventList.add(e2);
         eventList.add(e3);
-
         repo.save(eventList);
     }
 }

@@ -25,6 +25,7 @@ public class BeerTest {
         secondMap.put("Name", "Åbro Orginal");
         secondMap.put("Description", "Damm");
         secondMap.put("Style", "Lager");
+        secondMap.put("Nr", 213124);
         secondMap.put("Drink_number", 213124);
         secondMap.put("Price", 23.2);
         secondMap.put("Brewery", "Åbro");
@@ -37,6 +38,7 @@ public class BeerTest {
         secondMap.put("Volume", 50.0);
         secondMap.put("Salestart", formatter.parse("2005-10-01"));
         secondMap.put("Supplier", "Åbro");
+        secondMap.put("Name2", "");
 
         assertEquals(firstMap, secondMap);
     }
