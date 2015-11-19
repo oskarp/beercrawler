@@ -18,6 +18,7 @@ public class EventRepositoryREST implements EventRepository {
     private final String url;
     private final ObjectMapper mapper = JsonFactory.create();
 
+
     @Inject
     public EventRepositoryREST(@Named("beercrawler.event.repository.url") String url) {
         this.url = url;
