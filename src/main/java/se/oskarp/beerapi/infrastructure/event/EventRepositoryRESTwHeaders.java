@@ -31,6 +31,7 @@ public class EventRepositoryRESTwHeaders implements EventRepository{
     @Override
     public void save(List<Event> events) {
         Map headers = new HashMap();
+        System.out.println("Trying with token " + this.token);
         headers.put("X-Authorization", this.token);
         String result = HTTP.postWithContentType(this.url, headers,"application/json", this.mapper.writeValueAsString(events));
         //String result = HTTP.postJSON(this.url, this.mapper.writeValueAsString(events));

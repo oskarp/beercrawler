@@ -8,6 +8,7 @@ import se.oskarp.beerapi.domain.event.EventRepository;
 import se.oskarp.beerapi.infrastructure.beer.BeerImporterSystemetApi;
 import se.oskarp.beerapi.infrastructure.beer.BeerRepositoryFS;
 import se.oskarp.beerapi.infrastructure.event.EventRepositoryREST;
+import se.oskarp.beerapi.infrastructure.event.EventRepositoryRESTwHeaders;
 
 import java.util.Properties;
 
@@ -22,7 +23,7 @@ public class Configuration extends AbstractModule {
     @Override
     protected void configure() {
         bind(BeerRepository.class).toInstance(new BeerRepositoryFS("local.json"));
-        bind(EventRepository.class).to(EventRepositoryREST.class);
+        bind(EventRepository.class).to(EventRepositoryRESTwHeaders.class);
         bind(BeerImporter.class).to(BeerImporterSystemetApi.class);
 
         if (properties != null) {
