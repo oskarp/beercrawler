@@ -13,8 +13,7 @@ import se.oskarp.beerapi.domain.event.UnableToSaveException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -41,16 +40,17 @@ public class FileBasedRecovery implements EventRepository {
 
     @Override
     public void save(List<Event> events) {
+        checkNotNull(events);
+
         try {
-            List<Event> pending = readPendingEvents(pendingEventsFilePath);
-
-            savePendingEvents(pending);
-
+            savePendingEvents(readPendingEvents(pendingEventsFilePath));
             recreatePendingFile(pendingEventsFilePath);
-
             repository.save(events);
         } catch (UnableToSaveException | IOException e) {
-            mapper.writeValue(pendingEventsFilePath.toFile(), events);
+            List<Event> all = readPendingEvents(pendingEventsFilePath);
+            all.addAll(events);
+            mapper.writeValue(pendingEventsFilePath.toFile(), all);
+
             logger.error("Something went terribly wrong, appending events to pending file", e);
             throw Throwables.propagate(e);
         }
@@ -75,7 +75,7 @@ public class FileBasedRecovery implements EventRepository {
         // boon will cry if file is empty :/
         return path.toFile().length() != 0
                 ? mapper.readValue(path.toFile(), List.class, Event.class)
-                : Collections.emptyList();
+                : new ArrayList<>();
     }
 
     private void createIfMissing(Path path) {
