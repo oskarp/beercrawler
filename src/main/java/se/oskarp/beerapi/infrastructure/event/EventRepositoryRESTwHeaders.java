@@ -6,6 +6,7 @@ import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.domain.event.Event;
 import se.oskarp.beerapi.domain.event.EventRepository;
+import se.oskarp.beerapi.domain.event.UnableToSaveException;
 
 import javax.inject.Named;
 import java.util.HashMap;
@@ -29,12 +30,16 @@ public class EventRepositoryRESTwHeaders implements EventRepository{
     }
 
     @Override
-    public void save(List<Event> events) {
+    public void save(List<Event> events) throws UnableToSaveException {
         Map headers = new HashMap();
         System.out.println("Trying with token " + this.token);
         headers.put("X-Authorization", this.token);
-        String result = HTTP.postWithContentType(this.url, headers,"application/json", this.mapper.writeValueAsString(events));
-        //String result = HTTP.postJSON(this.url, this.mapper.writeValueAsString(events));
-        System.out.println(result);
+        try {
+            String result = HTTP.postWithContentType(this.url, headers, "application/json", this.mapper.writeValueAsString(events));
+            //String result = HTTP.postJSON(this.url, this.mapper.writeValueAsString(events));
+            System.out.println(result);
+        } catch (Exception e) {
+            throw new UnableToSaveException(e);
+        }
     }
 }
