@@ -4,6 +4,7 @@ import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.domain.event.Event;
 import se.oskarp.beerapi.domain.event.EventRepository;
+import se.oskarp.beerapi.domain.event.UnableToSaveException;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,12 +39,13 @@ public class EventRepositoryFS implements EventRepository {
      */
 
     @Override
-    public void save(List<Event> events) {
+    public void save(List<Event> events) throws UnableToSaveException {
         try {
             FileOutputStream fos = new FileOutputStream(this.path);
             mapper.writeValue(fos, events);
         } catch (IOException e) {
             e.printStackTrace();
+            throw new UnableToSaveException(e);
         }
     }
 }

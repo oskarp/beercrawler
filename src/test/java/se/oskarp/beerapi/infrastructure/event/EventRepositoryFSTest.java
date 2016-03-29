@@ -61,4 +61,5 @@ public class EventRepositoryFSTest {
 
         assertEquals(eventList, events);
     }
+
 }

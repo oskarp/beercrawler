@@ -40,7 +40,7 @@ public class EventFactory {
         for(Beer b: addList) {
             for(Beer b2: deleteList) {
                 if(b.getDrink_number() == b2.getDrink_number()) {
-                    Event e = new Event(b.getDrink_number(), Event.Action.Update, b, b2);
+                    Event e = new Event(b.getNr(), Event.Action.Update, b, b2);
                     result.add(e);
                     shouldNotBeAdded.add(b);
                     shouldNotBeRemoved.add(b2);

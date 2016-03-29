@@ -8,5 +8,5 @@ import java.util.List;
  * Created by oskar on 16/06/15.
  */
 public interface EventRepository {
-    void save(List<Event> events);
+    void save(List<Event> events) throws UnableToSaveException;
 }
