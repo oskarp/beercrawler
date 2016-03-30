@@ -6,6 +6,7 @@ import org.boon.json.JsonFactory;
 import org.boon.json.ObjectMapper;
 import se.oskarp.beerapi.domain.event.Event;
 import se.oskarp.beerapi.domain.event.EventRepository;
+import se.oskarp.beerapi.domain.event.UnableToSaveException;
 
 import javax.inject.Named;
 import java.util.List;
@@ -25,8 +26,12 @@ public class EventRepositoryREST implements EventRepository {
     }
 
     @Override
-    public void save(List<Event> events) {
-        String result = HTTP.postJSON(this.url, this.mapper.writeValueAsString(events));
-        System.out.println(result);
+    public void save(List<Event> events) throws UnableToSaveException {
+        try {
+            String result = HTTP.postJSON(this.url, this.mapper.writeValueAsString(events));
+            System.out.println(result);
+        } catch (Exception e) {
+            throw new UnableToSaveException(e);
+        }
     }
 }
