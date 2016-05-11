@@ -125,9 +125,19 @@ public class BeerImporterSystemetApi implements BeerImporter {
                             case "RavarorBeskrivning":
                                 currentBeer.setDescription(content);
                                 break;
+                            case "Sortiment":
+                                currentBeer.setSortiment(content);
+                                break;
+                            case "Typ":
+                                currentBeer.setStyle(content);
+                                break;
+                            case "Utgått":
+                                currentBeer.setDiscontinued(Boolean.parseBoolean(content));
+                                break;
                             case "artikel":
                                 if (currentBeer.getVarugrupp().startsWith("öl")) {
-                                    currentBeer.setStyle(currentBeer.getVarugrupp().substring(4));
+                                    // Probably not working anymore due to changes in systemets API.
+                                    //currentBeer.setStyle(currentBeer.getVarugrupp().substring(4));
                                     result.add(currentBeer);
                                 }
                                 break;

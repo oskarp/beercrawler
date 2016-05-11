@@ -31,6 +31,10 @@ public class Beer {
     private double volume;
     private Date salestart;
     private String supplier;
+    private String sortiment;
+
+
+    private boolean discontinued;
 
     /**
      * Events sometimes requires empty Beer objects to represent states of Create or Delete.
@@ -76,6 +80,13 @@ public class Beer {
         }
 
         return map;
+    }
+    public boolean isDiscontinued() {
+        return discontinued;
+    }
+
+    public void setDiscontinued(boolean discontinued) {
+        this.discontinued = discontinued;
     }
 
     public String getName() {
@@ -215,6 +226,10 @@ public class Beer {
     public void setName2(String name2) {
         this.name2 = name2;
     }
+
+    public String getSortiment() { return sortiment; }
+
+    public void setSortiment(String sortiment) { this.sortiment = sortiment;}
 
     @Override
     public boolean equals(Object o) {
